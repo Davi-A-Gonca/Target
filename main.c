@@ -1,34 +1,30 @@
 #include <stdio.h>
-#include "locale.h"
+
+double calculoPercentual(double faturamento_mensal, double faturamento_total){
+    double porcentagem_total = 100, porcentagem_estado = 0;
+    porcentagem_estado = (faturamento_mensal * porcentagem_total) / faturamento_total;
+    return porcentagem_estado;
+}
 
 int main() {
-    int n1, n2, n3, numero, cont;
-    char repeticao;
-    do {
-        repeticao = ' ';
-        n1 = 0, n2 = 1, n3 = 0, cont = 0;
-        printf("Digiter um numero, e checarei se pertence a sequencia de Fibonacci: ");
-        fflush(stdin);
-        scanf("%d", &numero);
-        while (numero != n3 && numero > n3){
-            n3 = n1 + n2;
-            n1 = n2;
-            n2 = n3;
-            cont+=1;
-        }
-        if(numero == n3){
-            printf("O numero %d pertence a sequencia de Fibonacci, localizado na %d posicao.\n", numero, cont);
-        } else{
-            printf("O numero %d nao pertence a sequencia de Fibonacci.\n", numero);
-        }
-        do {
-            printf("Deseja checar outro numero? [S/N]");
-            fflush(stdin);
-            scanf("%c", &repeticao);
-            if (repeticao != 'S' && repeticao != 's' && repeticao != 'n' && repeticao != 'N'){
-                printf("Opcao invalida.\n");
-            }
-        } while (repeticao != 'S' && repeticao != 's' && repeticao != 'n' && repeticao != 'N');
-    } while (repeticao != 'N' && repeticao != 'n');
+    double SP = 67836.43,
+        RJ = 36678.66,
+        MG = 29229.88,
+        ES = 27165.48,
+        Outros = 19849.53,
+        tot = SP + RJ + MG + ES + Outros,
+        spPercentual = calculoPercentual(SP, tot),
+        rjPercentual = calculoPercentual(RJ, tot),
+        mgPercentual = calculoPercentual(MG,tot),
+        esPercentual = calculoPercentual(ES,tot),
+        outrosPercentual = calculoPercentual(Outros,tot);
+    printf("Os Percentuais do faturamento mensal de cada estado: \n");
+    printf("SP: %.2lf -> %.2lf%c\n", SP, spPercentual, '%');
+    printf("RJ: %.2lf -> %.2lf%c\n", RJ, rjPercentual, '%');
+    printf("MG: %.2lf -> %.2lf%c\n", MG, esPercentual, '%');
+    printf("ES: %.2lf -> %.2lf%c\n", ES, mgPercentual, '%');
+    printf("Outros: %.2lf -> %.2lf%c\n", Outros, outrosPercentual, '%');
+    printf("Total: %.2lf -> %.2lf%c\n", tot, 100.00, '%');
+
     return 0;
 }
